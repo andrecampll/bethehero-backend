@@ -23,5 +23,26 @@ module.exports = {
     });
 
     return response.json({ id });
+  },
+
+  async update(request, response) {
+    const { name, email, whatsapp, city, uf } = request.body;
+    const ong_id = request.headers.authorization;
+
+    await connection('ongs').where('id', ong_id).update({
+      name,
+      email,
+      whatsapp,
+      city,
+      uf,
+    });
+
+    return response.json({
+      name,
+      email,
+      whatsapp,
+      city,
+      uf,
+    })
   }
 };

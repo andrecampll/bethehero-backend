@@ -55,4 +55,6 @@ routes.delete('/incidents/:id', celebrate({
   }),
 }), IncidentController.destroy);
 
+routes.put('/profile/edit', OngController.update);
+
 module.exports = routes;

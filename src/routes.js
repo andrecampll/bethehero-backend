@@ -55,6 +55,14 @@ routes.delete('/incidents/:id', celebrate({
   }),
 }), IncidentController.destroy);
 
-routes.put('/profile/edit', OngController.update);
+routes.put('/profile/edit', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    name: Joi.string().required(),
+    email: Joi.string().required().email(),
+    whatsapp: Joi.string().min(10).max(11).required(),
+    city: Joi.string().required(),
+    uf: Joi.string().required().length(2),
+  })
+}), OngController.update);
 
 module.exports = routes;
